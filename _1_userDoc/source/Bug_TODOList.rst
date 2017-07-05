@@ -21,7 +21,7 @@ Bug identifies
     :Status:                DONE
     :Problematique:         La doc automatique avec sphinx ne marche pas.
     :Traitemant:            Problème d'encodage des fichiers. Tous les fichiers ont été
-                            réencoder en UTF-8_sans_BOM
+                            réencoder en UTF-8 (sans BOM)
 
     
 ------------------------------------------------------------------------------------------
