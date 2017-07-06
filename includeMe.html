@@ -71,7 +71,7 @@
 </div>
 <hr class="docutils" />
 <div class="section" id="description">
-<h2>Description<a class="headerlink" href="#description" title="Lien permanent vers ce titre">¶</a></h2>
+<h2>Déscription<a class="headerlink" href="#description" title="Lien permanent vers ce titre">¶</a></h2>
 <blockquote>
 <div><p>Cette Librairie ne fait rien. Elle n’existe que pour pouvoir tester certain
 éléments des autres lib en cours de développement.</p>
@@ -79,6 +79,26 @@
 la documentation de façon automatique avec Sphinx et ainsi pouvoir tester des éléments
 de traitement de la documentation.</p>
 </div></blockquote>
+</div>
+<div class="section" id="arborescence-du-projet">
+<h2>Arborescence du projet<a class="headerlink" href="#arborescence-du-projet" title="Lien permanent vers ce titre">¶</a></h2>
+<p>Pour aider à la compréhension de mon organisation, voici un bref déscrptif de l’arborescence de se projet. Cette arborescence est à reproduire si vous récupérez ce dépôt depuis GitHub.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">FAKELIB</span>                 <span class="c1"># Dossier racine du projet (non versionner)</span>
+<span class="o">|</span>
+<span class="o">+--</span><span class="n">project</span>              <span class="c1"># (branch master) contient l&#39;ensemble du projet en lui même</span>
+<span class="o">|</span>   <span class="o">|</span>
+<span class="o">|</span>   <span class="o">+--</span><span class="n">_1_userDoc</span>       <span class="c1"># Contien toute la documentation relative au projet</span>
+<span class="o">|</span>   <span class="o">|</span>   <span class="o">|</span>
+<span class="o">|</span>   <span class="o">|</span>   \<span class="o">--</span><span class="n">source</span>       <span class="c1"># Dossier réunissant les sources utilisées par Sphinx</span>
+<span class="o">|</span>   <span class="o">|</span>
+<span class="o">|</span>   \<span class="o">--</span><span class="n">_3_software</span>      <span class="c1"># Contien toute la partie programmation du projet</span>
+<span class="o">|</span>
+\<span class="o">--</span><span class="n">webDoc</span>               <span class="c1"># Dossier racine de la documentation qui doit être publiée</span>
+    <span class="o">|</span>
+    \<span class="o">--</span><span class="n">html</span>             <span class="c1"># (branch gh-pages) C&#39;est dans se dosier que Sphinx vat</span>
+                        <span class="c1"># générer la documentation à publié sur internet</span>
+</pre></div>
+</div>
 </div>
 </div>
 
@@ -92,7 +112,8 @@ de traitement de la documentation.</p>
   <ul>
 <li><a class="reference internal" href="#">README_fakeLib</a><ul>
 <li><a class="reference internal" href="#infos-generales">infos générales</a></li>
-<li><a class="reference internal" href="#description">Description</a></li>
+<li><a class="reference internal" href="#description">Déscription</a></li>
+<li><a class="reference internal" href="#arborescence-du-projet">Arborescence du projet</a></li>
 </ul>
 </li>
 </ul>
