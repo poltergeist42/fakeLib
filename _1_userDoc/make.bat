@@ -8,9 +8,10 @@ if "%SPHINXBUILD%" == "" (
 	set SPHINXBUILD=python -msphinx
 )
 set SOURCEDIR=source
-set BUILDDIR=../../webDoc
+set BUILDDIR=..\..\webDoc
 set SPHINXPROJ=fakeLib
 
+set GHPATH=..\..\webDoc\html
 if "%1" == "" goto help
 
 %SPHINXBUILD% >NUL 2>NUL
@@ -27,6 +28,12 @@ if errorlevel 9009 (
 )
 
 %SPHINXBUILD% -M %1 %SOURCEDIR% %BUILDDIR% %SPHINXOPTS%
+
+cd %BUILDDIR%\html
+git add .
+git commit -m "rebuilt docs"
+git push origin gh-pages
+
 goto end
 
 :help
