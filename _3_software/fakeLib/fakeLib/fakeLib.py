@@ -40,7 +40,7 @@ Liste des libs
 
     - os
     - sys
-    - devChk
+    - devchk
     - argparse
     
 ####
@@ -58,31 +58,19 @@ objectif
 """
 
 import os, sys, time
-l_path = [ 
-            "../../../../../devChk/project/_3_software"
-         ]
-for p in l_path :
-    if os.path.isdir( p ) :
-        sys.path.insert(0, p)
-    else :
-        print( "\n\t ***attention ***, le chemin : \n{}\n n'est pas valide !".format(p))
-   
+
 try :
-    from devChk import C_Benchmark as execTime
-    
+
+    from devchk_pac.devchk import C_DebugMsg as dbg
+    from devchk_pac.devchk import C_Benchmark as tm
+    from devchk_pac.devchk import C_GitChk as gitChk
+
+    v_dbgChk = True
+
 except ModuleNotFoundError:
     print( "devChk n'a pas été trouvé" )
     v_dbgChk = False
     
-try :
-    from devChk import C_DebugMsg
-    v_dbgChk = True
-    i_dbg = C_DebugMsg()
-   
-except ImportError :
-    print( "module devChk non present" )
-    v_dbgChk = False
-
 import argparse
 
 ####
@@ -102,59 +90,38 @@ class C_FakeLib( object ) :
             Création et initialisation des variables globales de cette Class
         """
         
-        ## Création de l'instance pour les message de debug
-        # self.i_dbg = C_DebugMsg(v_debug)
         
-####
-        
-    def __del__(self) :
-        """ **__del__()**
-        
-            Permet de terminer proprement l'instance de la Class courante
-        
-            il faut utilise : ::
-            
-                del [nom_de_l'_instance]
-                
-            *N.B :* Si l'instance n'est plus utilisée, cette méthode est appelée 
-            automatiquement.
-        """
-        ## dbg
-        v_dbg = 1
-        v_dbg2 = 1
-        f_dbg(v_dbg2, "__del__", self.__del__)
-        
-        ## Action
-        v_className = self.__class__.__name__
-
-        ## dbg
-        f_dbg( v_dbg, v_className, v_tittle = False  )
-        
+    @dbg()
+    @tm("time")
     def f_daleks( self ) :
         return "EX-TER-MI-NA-TE"
+
         
+    @dbg() 
+    @tm("time")
     def f_jeSappelGroot( self) :
         return "Je s'appel Groot !"
+
         
+    @dbg() 
+    @tm("time")
     def f_knocPeny( self, v_value ) :
         for i in range( v_value ) :
             print( "Toc ! toc ! toc ! Peny" )
         return "doue chaton"
+
         
+    @dbg() 
+    @tm("time")
     def f_42( self, v_value ) :
         if v_value == 42 :
             return 42, "la réponse à la vie, l'univers et tout le reste"
         
 ####
 
-def f_dbg( v_bool, v_data, v_tittle = False  ) :
-    """ Fonction de traitemant du debug """
-    if v_dbgChk and v_tittle :
-        i_dbg.dbgPrint( v_bool, v_tittle, v_data )
-        
-    elif v_dbgChk and not v_tittle :
-        i_dbg.dbgDel( v_bool, v_data)
-
+@dbg() 
+@tm("time")
+@gitChk(1, 'f')
 def main() :
     """ Fonction principale """
     
@@ -165,8 +132,9 @@ def main() :
     
     if args.debug :
         if v_dbgChk :
-            i_dbg.f_setAffichage( True )
             print( "Mode Debug activer" )
+            dbg(1)
+            tm(1)
         else :
             print( "Le mode Debug ne peut pas être active car le module n'est pas pressent")
 
