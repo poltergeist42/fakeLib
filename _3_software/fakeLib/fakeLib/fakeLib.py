@@ -59,6 +59,9 @@ objectif
 
 import os, sys, time
 
+import logging
+from logging.handlers import RotatingFileHandler
+
 try :
 
     from devchk_pac.devchk import C_DebugMsg as dbg
@@ -78,6 +81,17 @@ import argparse
 __all__ = ['C_FakeLib']
 
 ####
+
+## Init logger
+logger = logging.getLogger()
+logger.setLevel(logging.DEBUG)
+formatter = logging.Formatter('%(asctime)s::%(levelno)s::%(funcName)s:: %(message)s')
+file_handler = RotatingFileHandler('./_log/activity.log', 'a', 1000000, 1)
+file_handler.setLevel(logging.DEBUG)
+file_handler.setFormatter(formatter)
+logger.addHandler(file_handler)
+
+logger.info('Salut Poilu !')
 
 class C_FakeLib( object ) :
     """ Class fictive permettant de faire des tests pour les autres lib
