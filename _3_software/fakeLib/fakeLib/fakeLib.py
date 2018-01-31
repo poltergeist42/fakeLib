@@ -8,7 +8,7 @@ Infos
 
    :Nom du fichier:     fakeLib.py
    :Autheur:            `Poltergeist42 <https://github.com/poltergeist42>`_
-   :Version:            20170829
+   :Version:            20180131
 
 ####
 
@@ -82,16 +82,36 @@ __all__ = ['C_FakeLib']
 
 ####
 
-## Init logger
+#################
+#               #
+# Snipet logger #
+#               #
+#################
+v_chkDir = False
+for _, t_dir, _ in os.walk( '.' ) :
+    for i in t_dir :
+        if "_log" in t_dir :
+            v_chkDir = True
+        
+if not v_chkDir : 
+    os.makedirs(os.path.normpath("./_log"), mode=0o777, exist_ok=True)
+
 logger = logging.getLogger()
 logger.setLevel(logging.DEBUG)
-formatter = logging.Formatter('%(asctime)s::%(levelno)s::%(funcName)s:: %(message)s')
-file_handler = RotatingFileHandler('./_log/activity.log', 'a', 1000000, 1)
-file_handler.setLevel(logging.DEBUG)
-file_handler.setFormatter(formatter)
-logger.addHandler(file_handler)
+## dbg_handler
+dbg_formatter = logging.Formatter('%(asctime)s::%(levelname)s:: %(message)s')
+dbg_handler = RotatingFileHandler('./_log/activity.log', 'a', 1000000, 1)
+dbg_handler.setLevel(logging.DEBUG)
+dbg_handler.setFormatter(dbg_formatter)
 
-logger.info('Salut Poilu !')
+## info_handler
+info_formatter = logging.Formatter('\n%(asctime)s::%(levelname)s::%(funcName)s')
+info_handler = RotatingFileHandler('./_log/activity.log', 'a', 1000000, 1)
+info_handler.setLevel(logging.INFO)
+info_handler.setFormatter(info_formatter)
+
+logger.addHandler(dbg_handler)
+logger.addHandler(info_handler)
 
 class C_FakeLib( object ) :
     """ Class fictive permettant de faire des tests pour les autres lib
@@ -108,19 +128,27 @@ class C_FakeLib( object ) :
     @dbg()
     @tm("time")
     def f_daleks( self ) :
-        return "EX-TER-MI-NA-TE"
+        logger.info("")
+        try :
+            raise Exception("EX-TER-MI-NA-TE")
+        except Exception as e :
+            logger.warning( e )
+            print( e )
 
         
     @dbg() 
     @tm("time")
     def f_jeSappelGroot( self) :
+        logger.info("")
         return "Je s'appel Groot !"
 
         
     @dbg() 
     @tm("time")
     def f_knocPeny( self, v_value ) :
+        logger.info("")
         for i in range( v_value ) :
+            logger.debug(f"i - {i}")
             print( "Toc ! toc ! toc ! Peny" )
         return "doue chaton"
 
@@ -128,6 +156,8 @@ class C_FakeLib( object ) :
     @dbg() 
     @tm("time")
     def f_42( self, v_value ) :
+        logger.info("")
+        logger.debug(f"v_value - {v_value}")
         if v_value == 42 :
             return 42, "la réponse à la vie, l'univers et tout le reste"
         

@@ -1,6 +1,6 @@
 fakeLib
 =======
 
-.. automodule:: fakeLib.fakeLib
+.. automodule:: _3_software.fakeLib.fakeLib
    :members:
    
