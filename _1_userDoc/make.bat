@@ -33,8 +33,13 @@ if errorlevel 9009 (
 for /f %%i in ('git symbolic-ref HEAD --short') do set v_branch=%%i
 
 if %v_branch% == master (
-    echo branch %v_branch%.
+    echo.
+    echo ************************************
+    echo.
+    echo branch : %v_branch%.
     echo Envoie de le doc doc vers gh-pages
+    echo.
+    echo ************************************
     echo.
 
     :: reconstruction de la branch "gh-pages" et mise a jour du depot distant
@@ -45,10 +50,15 @@ if %v_branch% == master (
 
     goto end
 ) else (
-
-    echo Branch %v_branch%
+    echo.
+    echo ************************************
+    echo.
+    echo Branch : %v_branch%
     echo La doc reste en local
-
+    echo.
+    echo ************************************
+    echo.
+  
     goto end
 )
 
